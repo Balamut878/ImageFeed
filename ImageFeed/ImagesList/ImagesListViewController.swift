@@ -8,6 +8,13 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
+    private var presenter: ImagesListPresenterProtocol!
+
+        func configure(_ presenter: ImagesListPresenterProtocol) {
+            self.presenter = presenter
+            presenter.view = self
+        }
+
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     @IBOutlet private var tableView: UITableView!
@@ -72,6 +79,9 @@ final class ImagesListViewController: UIViewController {
         }
     }
 }
+
+// MARK: Поддержка протокола ImagesListViewProtocol
+extension ImagesListViewController: ImagesListViewProtocol {}
 
 // MARK: UITableViewDataSource
 extension ImagesListViewController: UITableViewDataSource {

@@ -8,7 +8,13 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController, ProfileViewProtocol {
+        private var presenter: ProfilePresenterProtocol!
+
+        func configure(_ presenter: ProfilePresenterProtocol) {
+            self.presenter = presenter
+            presenter.view = self
+        }
     
     // MARK: Subviews
     

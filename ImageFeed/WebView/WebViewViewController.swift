@@ -30,9 +30,12 @@ final class WebViewViewController: UIViewController, WebViewViewControllerProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Для UI-теста!
+        webView.accessibilityIdentifier = "UnsplashWebView"
+        
         webView.navigationDelegate = self
         presenter?.viewDidLoad() // Теперь запрос идёт через презентер
-
+        
         // Подписка на обновление прогресса
         estimatedProgressObservation = webView.observe(\.estimatedProgress,
                                                         options: .new) { [weak self] _, _ in
@@ -44,15 +47,15 @@ final class WebViewViewController: UIViewController, WebViewViewControllerProtoc
     func load(request: URLRequest) {
         webView.load(request)
     }
-
+    
     func setProgressValue(_ newValue: Float) {
         progressView.progress = newValue
     }
-
+    
     func setProgressHidden(_ isHidden: Bool) {
         progressView.isHidden = isHidden
     }
-
+    
     private func code(from navigationAction: WKNavigationAction) -> String? {
         guard let url = navigationAction.request.url else {
             return nil

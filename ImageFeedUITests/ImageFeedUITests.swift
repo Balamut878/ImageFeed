@@ -59,6 +59,9 @@ final class ImageFeedUITests: XCTestCase {
         let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
         
         cellToLike.buttons["No Active"].tap()
+        
+        sleep(2)
+        
         cellToLike.buttons["Active"].tap()
         
         sleep(2)
@@ -68,9 +71,9 @@ final class ImageFeedUITests: XCTestCase {
         sleep(2)
         
         let image = app.scrollViews.images.element(boundBy: 0)
-        // Zoom in
-        image.pinch(withScale: 3, velocity: 1) // zoom in
-        // Zoom out
+        
+        image.pinch(withScale: 3, velocity: 1)
+        
         image.pinch(withScale: 0.5, velocity: -1)
         
         let navBackButtonWhiteButton = app.buttons["nav_back_button"]
@@ -79,21 +82,21 @@ final class ImageFeedUITests: XCTestCase {
     
     func testProfile() throws {
         sleep(2)
-        
+
         app.tabBars.buttons.element(boundBy: 1).tap()
-        
+
         let nameText = app.staticTexts.matching(identifier: "nameLabel").firstMatch
         XCTAssertTrue(nameText.waitForExistence(timeout: 5), "Имя пользователя не появилось.")
-        
+
         let usernameText = app.staticTexts.matching(identifier: "loginLabel").firstMatch
         XCTAssertTrue(usernameText.waitForExistence(timeout: 5), "Никнейм не появился.")
-        
+
         let logoutButton = app.buttons.matching(identifier: "logoutButton").firstMatch
         XCTAssertTrue(logoutButton.waitForExistence(timeout: 5), "Кнопка выхода не найдена.")
         logoutButton.tap()
-        
+
         let yesButton = app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"]
         XCTAssertTrue(yesButton.waitForExistence(timeout: 5), "Кнопка 'Да' в алерте 'Пока, пока!' не найдена.")
         yesButton.tap()
     }
-}
+   }

@@ -9,12 +9,12 @@ import UIKit
 
 final class ImagesListViewController: UIViewController {
     private var presenter: ImagesListPresenterProtocol!
-
-        func configure(_ presenter: ImagesListPresenterProtocol) {
-            self.presenter = presenter
-            presenter.view = self
-        }
-
+    
+    func configure(_ presenter: ImagesListPresenterProtocol) {
+        self.presenter = presenter
+        presenter.view = self
+    }
+    
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     @IBOutlet private var tableView: UITableView!

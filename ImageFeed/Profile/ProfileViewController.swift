@@ -8,7 +8,13 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController, ProfileViewProtocol {
+    private var presenter: ProfilePresenterProtocol!
+    
+    func configure(_ presenter: ProfilePresenterProtocol) {
+        self.presenter = presenter
+        presenter.view = self
+    }
     
     // MARK: Subviews
     
@@ -144,6 +150,10 @@ final class ProfileViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview($0)
     }
+        // Для UI-тестов
+        nameLabel.accessibilityIdentifier = "nameLabel"
+        loginNameLabel.accessibilityIdentifier = "loginLabel"
+        logoutButton.accessibilityIdentifier = "logoutButton"
     }
     private func setupLayouts() {
         NSLayoutConstraint.activate([
